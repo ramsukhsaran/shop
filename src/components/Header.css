@@ -8,11 +8,23 @@
 .nav-app{
     margin-left:5%;
 }
+
+.navbar1{
+    position:relative;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    padding: 0.5rem 1rem;
+
+}
+
+
+
+
   
-.container-nav{
-    width: 100%;
-    margin-top:0;
-    margin-right: 0;
+.container-nav{   
+    width: 100vh;
     padding-left: 0;
     padding-right:0;
 }

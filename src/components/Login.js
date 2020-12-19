@@ -1,28 +1,46 @@
-import React,{ useState} from 'react';
+import React,{ useState,useContext} from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
+import Msgshow from '../components/msgshow.js/Msgshow'
+import UserContext from './context/UserContext'
 
 
 const Login = () => {
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
-   
-    const handleSubmit=(e)=>{
+    const [msg, setMsg]= useState();
+
+    const {setUserData} = useContext(UserContext);
+    const history=useHistory();
+
+    const handleSubmit = async(e)=>{
         e.preventDefault();
-       const newLogin={
-           email,
-           password
-       }
+
+      try{
+
+       const newLogin = {email,password}
+       const loginRes = await axios.post('http://localhost:5000/users/login',newLogin);
+
+        setUserData({
+            token:loginRes.data.token,
+            user:loginRes.data.name,
+            userId:loginRes.data.userId
+        })
         
-      axios.post('http://localhost:5000/users/login',newLogin)
-            .then((response=>console.log(response.data)))
-            .catch((err)=>console.log(err))
-       
+       localStorage.setItem("auth-token",loginRes.data.token)
+       history.push('/')
+
+        } catch(err){
+            err.response.data.msg && setMsg(err.response.data.msg);
+            
+        } 
 
     }
 
     return (
         <div className="container-fluid" style={{backgroundColor: 'lightblue',height:'100vh'}}>
             <div className="row">
+                <div>{msg && (<Msgshow message={msg} clearMsg={() => setMsg(undefined)} />)}</div>
                     <div className="col-4 offset-4 card rounded" style={{backgroundColor: '#f3f3f3',marginTop:'8rem'}}>
                     <div className="text-center mb-3 mt-2" >
                         <i class="fa fa-user fa-2x" aria-hidden="true"></i> 

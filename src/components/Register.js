@@ -15,9 +15,9 @@ const Register = () => {
     const [mobileno, setMobileno] = useState();
     const [address, setAddress] = useState();
     
-    let [msg,setMsg] = useState();
-    
-    const handleSubmit = (e) => {
+    let [msg,setMsg] = useState('');
+    let redirect=false
+    const handleSubmit =  (e) => {
         e.preventDefault();
         const newUser={
             email,
@@ -29,19 +29,31 @@ const Register = () => {
 
         };
         
-       axios.post('http://localhost:5000/users/register',newUser)
-              .then(res=>{console.log(res)})
-              .catch(err =>{
-                  err.response.data.msg && setMsg(err.response.data.msg)
-              })
+     axios.post('http://localhost:5000/users/register',newUser)
+           .then(res =>{console.log(res.data)
+            if(res.data.msg === 'SignUp successful'){
+                redirect=true
+                if(redirect){
+                    history.push('/login')
+                }
+            }
+                        
+        })
+           .catch(err =>{
+               setMsg(err.response.data.msg)
+
+        })
+
+       
+    
+
         
-        // history.push('/login')
     }
     return (
         <div className="container-fluid" style={{backgroundColor: 'lightblue',height:'100vh'}}>
             <div className="row">    
-                  <div >{msg && (<Msgshow message={msg} clearMsg={() =>setMsg(undefined)} />)}</div>    
-                    <div className="col-4 offset-4 card rounded"  style={{backgroundColor: '#f3f3f3',marginTop:'2rem'}}>
+                  <div >{ msg &&(<Msgshow message={msg} clearMsg={() =>setMsg(undefined)} />)}</div>    
+                    <div className="col-4 offset-4 card rounded"  style={{backgroundColor: '#f3f3f3',marginTop:'3rem'}}>
                         <div className="text-center mt-1"><i className="fa fa-user-plus fa-2x" aria-hidden="true"></i> </div>
                         <form  onSubmit={e=>handleSubmit(e)} >
                             <label  htmlFor="email">Email ID:</label>

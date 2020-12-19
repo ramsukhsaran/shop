@@ -1,0 +1,19 @@
+.msg-notice{
+    margin-left:32rem;
+    margin-top: 1rem;
+    width:31rem;
+    padding:1rem;
+    border: 1px solid #c96a6a;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d6c8c8;
+}
+.msg-notice button{
+    width: 2rem;
+    height: 2rem;
+    background-color: #df4343;
+    color: #ffffff;
+}
