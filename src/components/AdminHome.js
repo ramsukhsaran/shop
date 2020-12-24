@@ -58,7 +58,8 @@ const AdminHome = () => {
             ProductImgUrl,
             Price
         }
-        axios.post('http://localhost:5000/products/add', newProduct)
+        const token=localStorage.getItem('auth-token')
+        axios.post('http://localhost:5000/products/add', newProduct,{headers:{'x-auth-token':token}})
             .then(response =>setServerMsg(response.data.msg))
             .catch(err => console.log(err))
        
@@ -178,6 +179,7 @@ const AdminHome = () => {
 
                 <div id="removeproduct" class="tab-pane fade">
                     <RemoveProduct />
+                    <br />
                 </div>
 
 
