@@ -63,7 +63,7 @@ const RemoveProduct = () => {
                 msg ? <Msgshow message={msg} clearMsg={() => setMsg(undefined)} /> : null
             }
             {
-                flag ? '' : (
+                
                     <div className="row mt-3">
                         <div className="col-4 offset-4">
                             <form onSubmit={e => loadProduct(e)}>
@@ -75,9 +75,9 @@ const RemoveProduct = () => {
 
                         </div>
                     </div>
-                )
+                
             }
-
+             <hr />
             <div className="d-flex justify-content-around">
 
                 <div>
