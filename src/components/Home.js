@@ -1,80 +1,38 @@
-import React from 'react';
+import React,{useState,useContext}from 'react';
+import UserContext from '../components/context/UserContext';
+import UserHome from './UserHome';
+import AdminHome from './AdminHome';
 
-const Home = () => {
+const Home =  () => {
+    const {userData} =useContext(UserContext)
+    const login=localStorage.getItem('login');
+    if(login){
+        console.log(login)
+    }
     return (
-        <div className="" style={{ backgroundColor: 'lightblue', height: '93vh' }}>
-            <div class="jumbotron" style={{ display: 'flex', justifyContent: 'space-between', columnGap: '10px' }}>
-                <div className="card" style={{ width: '300px' }}>
-                    <div className="card-title">
-                        <img src="https://hbr.org/resources/images/article_assets/2019/09/Logos-SecondTake1-2.jpg" alt="no img" width="300px" />
-
-                    </div>
-                    <div className="card-header">
-                        <h2>Burger</h2>
-                    </div>
-                    <div className="card-body">
-
-                        <p>Tasty Burger with Extra cheese</p>
-                        <h3>Price:${15.00}</h3>
-                        <button className="btn btn-primary float-right">Add To Cart</button>
-                    </div>
-                </div>
-                {/*  */}
-                <div className="card" style={{ width: '300px' }}>
-                    <div className="card-title">
-                        <img src="https://hbr.org/resources/images/article_assets/2019/09/Logos-SecondTake1-2.jpg" width="300px" />
-
-                    </div>
-                    <div className="card-header">
-                        <h2>Burger</h2>
-                    </div>
-                    <div className="card-body">
-
-                        <p>Tasty Burger with Extra cheese</p>
-                        <h3>Price:${15.00}</h3>
-                        <button className="btn btn-primary float-right">Add To Cart</button>
-                    </div>
-                </div>
-
-
-                {/* 
-                    */}
-
-                <div className="card" style={{ width: '300px' }}>
-                    <div className="card-title">
-                        <img src="https://hbr.org/resources/images/article_assets/2019/09/Logos-SecondTake1-2.jpg" width="300px" />
-
-                    </div>
-                    <div className="card-header">
-                        <h2>Burger</h2>
-                    </div>
-                    <div className="card-body">
-
-                        <p>Tasty Burger with Extra cheese</p>
-                        <h3>Price:${15.00}</h3>
-                        <button className="btn btn-primary float-right">Add To Cart</button>
-                    </div>
-                </div>
-
-                <div className="card" style={{width:'300px'}}>
-                       <div className="card-title">
-                           <img  src="https://hbr.org/resources/images/article_assets/2019/09/Logos-SecondTake1-2.jpg" width="300px" />
+        <div>
+           
+            {
+                !userData.user ?(
+                    <>
+                    <div className="jumbotron container" style={{ marginTop: '2rem' }}>
+                        <h1 className="display-3">Welcome To Shopping App</h1>
         
-                       </div>
-                       <div className="card-header">
-                           <h2>Burger</h2>
-                       </div>
-                       <div className="card-body">
-
-                         <p>Tasty Burger with Extra cheese</p>
-                         <h3>Price:${15.00}</h3>
-                           <button className="btn btn-primary float-right">Add To Cart</button>
-                       </div>
-                   </div>
-
-                   
-
-            </div>
+                        <hr className="my-4" />
+                        <p className="lead">Here You can Get Unlimited Products with Best Quality!</p>
+                        <p className="lead">
+                            <a className="btn btn-primary btn-lg" href="#" role="button">Get Started</a>
+                        </p>
+                    </div>
+                </>
+                ):(<div>
+                    {
+                        userData.role === 'admin'?<AdminHome />:<UserHome />
+                    }
+                </div>)
+              
+                
+            }
         </div>
     );
 };

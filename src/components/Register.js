@@ -14,6 +14,7 @@ const Register = () => {
     const [name, setName] = useState();
     const [mobileno, setMobileno] = useState();
     const [address, setAddress] = useState();
+    const [role, setRole] = useState('user');
     
     let [msg,setMsg] = useState('');
     let redirect=false
@@ -25,10 +26,11 @@ const Register = () => {
             passwordCheck,
             name,
             mobileno,
-            address
+            address,
+            role
 
         };
-        
+        console.log(newUser)
      axios.post('http://localhost:5000/users/register',newUser)
            .then(res =>{console.log(res.data)
             if(res.data.msg === 'SignUp successful'){
@@ -74,7 +76,11 @@ const Register = () => {
                             
                             <label htmlFor="Address">Address:</label>
                             <input className="form-control" type="text" id="Address" name="address" onChange={e=>setAddress(e.target.value)}/>
-
+                            <label>Select Role:</label>
+                            <select className="form-control" onChange={e=>{setRole(e.target.value)}}>
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
                          
                             <br />
                             <div className="mt-3"><button type="submit" className="btn btn-primary form-control" >Register</button></div>

@@ -1,4 +1,5 @@
 import React,{ useState,useContext} from 'react';
+import jwt_decode from 'jwt-decode';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import Msgshow from '../components/msgshow.js/Msgshow'
@@ -11,6 +12,7 @@ const Login = () => {
     const [msg, setMsg]= useState();
 
     const {setUserData} = useContext(UserContext);
+
     const history=useHistory();
 
     const handleSubmit = async(e)=>{
@@ -21,16 +23,20 @@ const Login = () => {
        const newLogin = {email,password}
        const loginRes = await axios.post('http://localhost:5000/users/login',newLogin);
 
+
+       const decode = jwt_decode(loginRes.data.token)  // decoding jwt token 
         setUserData({
-            token:loginRes.data.token,
-            user:loginRes.data.name,
-            userId:loginRes.data.userId
+            userId:decode.id,
+            user:decode.name,
+            role:decode.role
         })
         
        localStorage.setItem("auth-token",loginRes.data.token)
+       localStorage.setItem('login',true)
        history.push('/')
 
-        } catch(err){
+        } 
+        catch(err){
             err.response.data.msg && setMsg(err.response.data.msg);
             
         } 
@@ -48,10 +54,10 @@ const Login = () => {
                         <form>
                             <label className="">Email ID:</label>
                             <input className="form-control mt-1" type="email" onChange={e=>setEmail(e.target.value)} />
-                            {/* <div style={{ color: 'red' }}>{this.state.errors.email}</div> */}
+                            
                             <label>Password</label>
                             <input className="form-control" type="password" onChange={e=>setPassword(e.target.value)} />
-                            {/* <div style={{ color: 'red' }}>{this.state.errors.password}</div> */}
+                            
                             <br />
                             <div className="mt-3"><button  className="btn btn-primary form-control" onClick={e=>handleSubmit(e)} >Login</button></div>
                             <br />

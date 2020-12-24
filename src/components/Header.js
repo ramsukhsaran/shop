@@ -13,12 +13,14 @@ const Header = () => {
 
     const logout = () => {
         setUserData({
-            token: undefined,
+            role: undefined,
             user: undefined,
             userId: undefined
         })
         localStorage.setItem('auth-token', '')
-        history.push('/')
+        localStorage.setItem('login',false)
+        history.push("/")
+        
 
     }
 
@@ -33,9 +35,13 @@ const Header = () => {
                  }
                  </>
                 {
-                    
                     userData.user ? (
-                              <button className="btn btn-danger my-2 my-sm-0 float-right" onClick={logout} >logout</button>) : (
+                              <div className="d-flex justify-content-between" style={{columnGap:'20px'}}>
+                              {
+                                  userData.role ==='user'?(<i className="fa fa-shopping-cart fa-3x" style={{color: 'white'}}></i>):''
+                              }    
+                              
+                              <button className="btn btn-danger my-2 my-sm-0 float-right" onClick={logout} >logout</button> </div>) : (
                         <>
                             <div className="navbar-right" id="navbar1">
                                 <button class="btn btn-primary my-2 my-sm-0" onClick={login}>Login</button>
