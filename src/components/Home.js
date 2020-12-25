@@ -5,10 +5,9 @@ import AdminHome from './AdminHome';
 
 const Home =  () => {
     const {userData} =useContext(UserContext)
-    const login=localStorage.getItem('login');
-    if(login){
-        console.log(login)
-    }
+   
+
+   
     return (
         <div>
            
@@ -24,7 +23,7 @@ const Home =  () => {
                             <a className="btn btn-primary btn-lg" href="#" role="button">Get Started</a>
                         </p>
                     </div>
-                </>
+                     </>
                 ):(<div>
                     {
                         userData.role === 'admin'?<AdminHome />:<UserHome />

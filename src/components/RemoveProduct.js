@@ -15,7 +15,7 @@ const RemoveProduct = () => {
         // fetch product for edit
         await axios.get(`http://localhost:5000/products/productId/${id}`)
             .then(response => setProduct(response.data))
-            .catch(error => console.log(error))
+            .catch(err=>setMsg(err.response.data.msg))
 
         setFlag(true)
     }

@@ -48,7 +48,7 @@ const UserHome = () => {
         <div className="container" style={{ backgroundColor: 'lightblue', marginTop: '20px' }}>
             <hr />
               <div className="jumbotron mt-3" >
-                        <h1  id="showcase">Welcome {userData.user}</h1>
+                        <h1  id="showcase">Welcome <span className="text-success">{userData.user}</span></h1>
         
                         <hr className="my-4" />
 
