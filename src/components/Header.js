@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import './Header.css'
 import UserContext from '../components/context/UserContext'
 import UserInfo from './userinfo/UserInfo'
+import CartItemShow from './CartItemShow'
 
 const Header = () => {
     const { userData, setUserData } = useContext(UserContext);
@@ -15,7 +16,9 @@ const Header = () => {
         setUserData({
             role: undefined,
             user: undefined,
-            userId: undefined
+            userId: undefined,
+            cart:{}
+
         })
         localStorage.setItem('auth-token', '')
         localStorage.setItem('login',false)
@@ -23,7 +26,7 @@ const Header = () => {
         
 
     }
-
+ 
     return (
         <div className="container-fluid bg-dark sticky-top container-nav">
             <nav class="navbar  navbar-light bg-dark navbar1">
@@ -36,11 +39,18 @@ const Header = () => {
                  </>
                 {
                     userData.user ? (
-                              <div className="d-flex justify-content-between" style={{columnGap:'20px'}}>
+                              <div className="d-flex justify-content-between" style={{columnGap:'25px'}}>
                               {
-                                  userData.role ==='user'?(<i className="fa fa-shopping-cart fa-3x" style={{color: 'white'}}></i>):''
+                                 
+                                      userData.role ==='user'?(
+                                          <div className="d-flex ">
+                                              <h4 className="text-danger mt-2">{<CartItemShow items={userData.cart.items} />}</h4>
+                                              <i className="fa fa-shopping-cart fa-2x mt-1 ml-1" style={{color: 'white'}}></i>
+                                          </div>
+                                      ):''      
+                               
                               }    
-                              
+                             
                               <button className="btn btn-danger my-2 my-sm-0 float-right" onClick={logout} >logout</button> </div>) : (
                         <>
                             <div className="navbar-right" id="navbar1">

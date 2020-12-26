@@ -13,7 +13,8 @@ function App() {
   const [userData,setUserData]=useState({
     token:undefined,
     user:undefined,
-    userId:undefined
+    userId:undefined,
+    cart:{}
   });
 
   return (
@@ -22,12 +23,12 @@ function App() {
      <UserContext.Provider  value={{userData,setUserData}}>
      <Header />
      <Switch>
-
        <Route exact path="/" component={Home} />
        <Route exact path="/login" component={Login} />
        <Route  exact path="/register" component={Register} />
        
      </Switch>
+
      </UserContext.Provider>
      </BrowserRouter>
     </div>

@@ -28,7 +28,11 @@ const Login = () => {
         setUserData({
             userId:decode.id,
             user:decode.name,
-            role:decode.role
+            role:decode.role,
+            cart:{
+                userId:decode.id,
+                items:[]
+            }
         })
         
        localStorage.setItem("auth-token",loginRes.data.token)

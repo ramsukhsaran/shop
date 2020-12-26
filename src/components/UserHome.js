@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import './style.css'
-import UserContext from '../components/context/UserContext'
+import UserContext from '../components/context/UserContext';
 // userHme screen
 const UserHome = () => {
 
     const [products, setProducts] = useState([])
-    const { userData } = useContext(UserContext)
+    const { userData, setUserData } = useContext(UserContext)
 
     useEffect(() => {
 
@@ -15,7 +15,17 @@ const UserHome = () => {
             .catch(error => console.log(error))
 
     }, [])
-
+   
+    const addToCart=(productId)=>{
+     
+        const {cart}=userData
+        const quantity=1
+        const item={productId,quantity}
+        cart.items.push(item)
+        
+    }
+    
+    // render products
     const renderData = (products) => {
         return products.map((product, idx) => {
             return (
@@ -33,7 +43,7 @@ const UserHome = () => {
                     <div className="card-footer">
                         <h1 className="text-warning"><span className="text-info">$</span>{product.Price}</h1>
                         <hr />
-                        <button className="btn btn-primary float-right">Add To Cart</button>
+                        <button className="btn btn-primary float-right" onClick={e=>addToCart(product.ProductId)} >Add To Cart</button>
                     </div>
                 </div>
 
