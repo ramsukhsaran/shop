@@ -19,9 +19,14 @@ const UserHome = () => {
     const addToCart=(productId)=>{
      
         const {cart}=userData
+        cart.userId=userData.userId
         const quantity=1
-        const item={productId,quantity}
-        cart.items.push(item)
+        const {items}=cart
+        cart.items.push([...items,{productId,quantity}])
+        setUserData({...userData,cart})
+        
+
+       console.log(userData)
         
     }
     

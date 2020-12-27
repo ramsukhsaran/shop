@@ -44,7 +44,7 @@ const Header = () => {
                                  
                                       userData.role ==='user'?(
                                           <div className="d-flex ">
-                                              <h4 className="text-danger mt-2">{<CartItemShow items={userData.cart.items} />}</h4>
+                                              <h4 className="text-danger mt-2">{userData.cart.items.length?<CartItemShow items={userData.cart.items} />:''}</h4>
                                               <i className="fa fa-shopping-cart fa-2x mt-1 ml-1" style={{color: 'white'}}></i>
                                           </div>
                                       ):''      

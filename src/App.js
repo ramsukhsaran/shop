@@ -14,7 +14,10 @@ function App() {
     token:undefined,
     user:undefined,
     userId:undefined,
-    cart:{}
+    cart:{
+      userId:undefined,
+      items:{}
+    }
   });
 
   return (
