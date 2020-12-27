@@ -15,18 +15,24 @@ const UserHome = () => {
             .catch(error => console.log(error))
 
     }, [])
-   
+    // adding product to cart
     const addToCart=(productId)=>{
      
         const {cart}=userData
         cart.userId=userData.userId
-        const quantity=1
+        let quantity=1
         const {items}=cart
-        cart.items.push([...items,{productId,quantity}])
-        setUserData({...userData,cart})
-        
 
-       console.log(userData)
+        for(let i=0;i<items.length;i++) {
+            if(items[i].productId==productId){
+                items[i].quantity++;
+                return;
+            }
+        }
+        cart.items.push({productId:productId, quantity:quantity})
+        
+        setUserData({...userData,cart})
+ 
         
     }
     
