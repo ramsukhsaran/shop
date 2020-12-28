@@ -171,13 +171,13 @@ const AdminHome = () => {
                     </div>
                 </div>
 
-                <div id="editproduct" class="tab-pane fade">
+                <div id="editproduct" className="tab-pane fade" >
                    <EditProduct />
                     
                 </div>
 
 
-                <div id="removeproduct" class="tab-pane fade">
+                <div id="removeproduct" className="tab-pane fade">
                     <RemoveProduct />
                     <br />
                 </div>

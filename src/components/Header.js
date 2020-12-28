@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import './Header.css'
 import UserContext from '../components/context/UserContext'
 import UserInfo from './userinfo/UserInfo'
-import CartItemShow from './CartItemShow'
+
 
 const Header = () => {
     const { userData, setUserData } = useContext(UserContext);
@@ -12,6 +12,7 @@ const Header = () => {
     const login = () => history.push("/login");
     const register = () => history.push("/register");
     const goToCart=() => history.push("/cart")
+    const goToHome=() => history.push('/')
 
     const logout = () => {
         setUserData({
@@ -45,14 +46,15 @@ const Header = () => {
                                  
                                       userData.role ==='user'?(
                                           <div className="d-flex ">
-                                              <h3 className="text-danger mt-2">{userData.cart.items.length?<CartItemShow items={userData.cart.items} />:''}</h3>
+                                              <h3 className="text-danger mt-2">{userData.cart.items.length?userData.cart.items.length:''}</h3>
                                               <button className="btn" onClick={goToCart}><i className="fa fa-shopping-cart fa-2x mt-1" style={{color: 'white'}}></i></button>
                                           </div>
                                       ):''      
                                
                               }    
-                             
-                              <button className="btn btn-danger my-2 my-sm-0 float-right" onClick={logout} >logout</button> </div>) : (
+                               <a className="mt-2 btn text-white btn-outline-info" onClick={goToHome}>Home</a>
+                               <a className="mt-2 btn text-white btn-outline-danger" onClick={logout}>logout</a>
+                               </div>) : (
                         <>
                             <div className="navbar-right" id="navbar1">
                                 <button class="btn btn-primary my-2 my-sm-0" onClick={login}>Login</button>

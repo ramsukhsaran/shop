@@ -22,17 +22,14 @@ const UserHome = () => {
         cart.userId=userData.userId
         let quantity=1
         const {items}=cart
-
         for(let i=0;i<items.length;i++) {
-            if(items[i].productId==productId){
+            if(items[i].productId===productId){
                 items[i].quantity++;
                 return;
             }
         }
         cart.items.push({productId:productId, quantity:quantity})
-        
         setUserData({...userData,cart})
- 
         
     }
     
@@ -55,7 +52,8 @@ const UserHome = () => {
                         <h1 className="text-warning"><span className="text-info">$</span>{product.Price}</h1>
                         <hr />
                         <button className="btn btn-primary float-right" onClick={e=>addToCart(product.ProductId)} >Add To Cart</button>
-                    </div>
+                      
+                        </div>
                 </div>
 
             )

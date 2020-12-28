@@ -5,9 +5,6 @@ import AdminHome from './AdminHome';
 
 const Home =  () => {
     const {userData} =useContext(UserContext)
-   
-
-   
     return (
         <div>
            

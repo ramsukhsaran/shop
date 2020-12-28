@@ -70,7 +70,7 @@ const EditProduct = () => {
            
         if (product !== undefined) {
             return (
-                <div>
+                <div >
                     
                     <div className="card jumbotron shadow  rounded" style={{ width: '350px'}}>
                         <h2 className="mb-3 badge badge-primary">Edit Product </h2> 
