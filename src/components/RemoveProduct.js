@@ -1,37 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import axios from 'axios'
 import Msgshow from '../components/msgshow.js/Msgshow'
 
-
-
 const RemoveProduct = () => {
-    const [id, setId] = useState()
-    const [product, setProduct] = useState()
-    const [msg, setMsg] = useState()
-    const [flag, setFlag] = useState(false)
+  const [id, setId] = useState()
+  const [product, setProduct] = useState()
+  const [msg, setMsg] = useState()
+  const [flag, setFlag] = useState(false)
 
-    const loadProduct = async (e) => {
-        e.preventDefault()
-        // fetch product for edit
-        await axios.get(`http://localhost:5000/products/productId/${id}`)
-            .then(response => setProduct(response.data))
-            .catch(err=>setMsg(err.response.data.msg))
+  const loadProduct = async (e) => {
+    e.preventDefault()
+    // fetch product for edit
+    await axios.get(`http://localhost:5000/products/productId/${id}`)
+      .then(response => setProduct(response.data))
+      .catch(err => setMsg(err.response.data.msg))
 
-        setFlag(true)
-    }
+    setFlag(true)
+  }
 
-    const deleteeProduct = () =>{
-        axios.delete(`http://localhost:5000/products/delete/${id}`,{headers: {'x-auth-token': localStorage.getItem('auth-token')}})
-             .then(response=>setMsg(response.data.msg))
-             .catch(error=>console.log(error))
-             setId('')
-             setFlag(false)
+  const deleteeProduct = () => {
+    axios.delete(`http://localhost:5000/products/delete/${id}`, { headers: { 'x-auth-token': localStorage.getItem('auth-token') } })
+      .then(response => setMsg(response.data.msg))
+      .catch(error => console.log(error))
+    setId('')
+    setFlag(false)
+  }
 
-    }
-
-    const renderProductCard = (product) => {
-        if (product !== undefined) {
-            return (
+  const renderProductCard = (product) => {
+    if (product !== undefined) {
+      return (
                 <div>
                     <div className="card shadow p-3 mb-5 bg-white rounded" style={{ width: '350px' }}>
                         <div className="card-title" style={{ height: 'auto' }}>
@@ -50,20 +47,18 @@ const RemoveProduct = () => {
 
                     </div>
                 </div>
-            )
-        }
-
+      )
     }
+  }
 
-
-    return (
+  return (
         <div>
 
             {
                 msg ? <Msgshow message={msg} clearMsg={() => setMsg(undefined)} /> : null
             }
             {
-                
+
                     <div className="row mt-3">
                         <div className="col-4 offset-4">
                             <form onSubmit={e => loadProduct(e)}>
@@ -75,7 +70,7 @@ const RemoveProduct = () => {
 
                         </div>
                     </div>
-                
+
             }
              <hr />
             <div className="d-flex justify-content-around">
@@ -88,7 +83,7 @@ const RemoveProduct = () => {
             </div>
 
         </div>
-    );
-};
+  )
+}
 
-export default RemoveProduct;
+export default RemoveProduct

@@ -1,4 +1,4 @@
-import React, { useContext, useState} from 'react';
+import React, { useContext, useState } from 'react'
 import Msgshow from '../components/msgshow.js/Msgshow'
 import EditProduct from './EditProduct'
 import RemoveProduct from './RemoveProduct'
@@ -6,30 +6,25 @@ import axios from 'axios'
 import UserContext from '../components/context/UserContext'
 
 const AdminHome = () => {
-    
-    const { userData } = useContext(UserContext)
-    const [products, setproducts] = useState([])
-    const [serverMsg,setServerMsg] = useState('') 
-    const [ProductId, setProductId] = useState()
-    const [ProductTitle, setProductTitle] = useState()
-    const [ProductImgUrl, setProductImgUrl] = useState()
-    const [ProductDes, setProductDes] = useState()
-    const [Price, setPrice] = useState()
+  const { userData } = useContext(UserContext)
+  const [products, setproducts] = useState([])
+  const [serverMsg, setServerMsg] = useState('')
+  const [ProductId, setProductId] = useState()
+  const [ProductTitle, setProductTitle] = useState()
+  const [ProductImgUrl, setProductImgUrl] = useState()
+  const [ProductDes, setProductDes] = useState()
+  const [Price, setPrice] = useState()
 
+  const loadAllProducts = () => {
+    // e.preventDefault()
+    axios.get('http://localhost:5000/products')
+      .then((response) => setproducts(response.data))
+      .catch((err) => console.log(err))
+  }
 
-    const loadAllProducts = () => {
-        // e.preventDefault()
-        axios.get('http://localhost:5000/products')
-            .then((response) => setproducts(response.data))
-            .catch((err) => console.log(err))
-
-    }
-
-   
-
-    const renderAllProducts = (products) => {
-        return products.map((product, idx) => {
-            return (
+  const renderAllProducts = (products) => {
+    return products.map((product, idx) => {
+      return (
                 <div className="card shadow p-3 mb-5 bg-white rounded" key={idx} style={{ width: '350px', height: '650px' }}>
                     <div className="card-title">
                         <img className="img-thumbnail" src={product.ProductImgUrl} alt="Img Error" height="250px" />
@@ -45,41 +40,40 @@ const AdminHome = () => {
                         <h1 className="text-warning"><span className="text-info">$</span>{product.Price}</h1>
                     </div>
                 </div>
-            )
-        })
-    }
+      )
+    })
+  }
 
-    const addProduct = (e) => {
-        e.preventDefault()
-        const newProduct = {
-            ProductId,
-            ProductTitle,
-            ProductDes,
-            ProductImgUrl,
-            Price
-        }
-        const token=localStorage.getItem('auth-token')
-        axios.post('http://localhost:5000/products/add', newProduct,{headers:{'x-auth-token':token}})
-            .then(response =>setServerMsg(response.data.msg))
-            .catch(err => console.log(err))
-       
-        setTimeout(() =>{
-            setProductId('')
-            setProductTitle('')
-            setProductDes('')
-            setProductImgUrl('')
-            setPrice('')
-            loadAllProducts()
-        },3000)
-        
+  const addProduct = (e) => {
+    e.preventDefault()
+    const newProduct = {
+      ProductId,
+      ProductTitle,
+      ProductDes,
+      ProductImgUrl,
+      Price
     }
+    const token = localStorage.getItem('auth-token')
+    axios.post('http://localhost:5000/products/add', newProduct, { headers: { 'x-auth-token': token } })
+      .then(response => setServerMsg(response.data.msg))
+      .catch(err => console.log(err))
 
-  
-    return (
+    setTimeout(() => {
+      setProductId('')
+      setProductTitle('')
+      setProductDes('')
+      setProductImgUrl('')
+      setPrice('')
+      loadAllProducts()
+    }, 3000)
+  }
+
+  return (
         <div className="container" style={{ backgroundColor: 'lightblue', marginTop: '20px' }}>
              <div className="d-flex text-success">{serverMsg && (<Msgshow message={serverMsg} clearMsg={() => setServerMsg(undefined)} />)}</div>
             {
-                !products.length ? (<div>
+                !products.length
+                  ? (<div>
                     <hr />
                     <div className="jumbotron mt-3" >
                         <h1 className="text-center text-success">Welcome Admin {userData.user}</h1>
@@ -87,12 +81,13 @@ const AdminHome = () => {
                     </div>
                     <br />
                     <hr />
-                </div>):''
+                </div>)
+                  : ''
             }
 
             <div className="d-flex justify-content-between">
                 <ul className="nav nav-tabs card-header-tabs">
-                    <li class="nav-link "><a data-toggle="tab" href="#allproducts"  onClick={loadAllProducts}>AllProducts</a></li>
+                    <li className="nav-link "><a data-toggle="tab" href="#allproducts" onClick={loadAllProducts}>AllProducts</a></li>
 
                     <li className="nav-link"><a data-toggle="tab" href="#addproducts">AddProduct &nbsp;<i className="fa fa-plus"></i></a></li>
 
@@ -105,9 +100,9 @@ const AdminHome = () => {
             </div>
             < hr />
             {/* Tab content */}
-            <div class="tab-content">
+            <div className="tab-content">
 
-                <div id="allproducts" class="tab-pane fade">
+                <div id="allproducts" className="tab-pane fade">
                     <div className="container d-flex justify-content-between flex-wrap" style={{ rowGap: '45px' }} >
                         {
                             products.length ? renderAllProducts(products) : ''
@@ -117,48 +112,48 @@ const AdminHome = () => {
 
                 </div>
 
-                <div id="addproducts" class="tab-pane fade">
+                <div id="addproducts" className="tab-pane fade">
                     <div className="row card p-4">
                         <div className="col-8 offset-2 jumbotron">
                             <div className="" style={{ height: 'auto' }}>
-                                <form  onSubmit={e=>addProduct(e)}> 
-                                    <div class="form-group row">
-                                        <label for="productid" class="col-sm-2">ProductID</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control" id="productid" value={ProductId} onChange={e => setProductId(e.target.value)} required placeholder="Enter ProductID...." />
+                                <form onSubmit={e => addProduct(e)}>
+                                    <div className="form-group row">
+                                        <label htmlFor="productid" className="col-sm-2">ProductID</label>
+                                        <div className="col-sm-10">
+                                            <input type="number" className="form-control" id="productid" value={ProductId} onChange={e => setProductId(e.target.value)} required placeholder="Enter ProductID...." />
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label for="productitle" class="col-sm-2 col-form-label">ProductTitle</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productitle" value ={ProductTitle} onChange={e => setProductTitle(e.target.value)} required placeholder="Enter Title ...." />
+                                    <div className="form-group row">
+                                        <label htmlFor="productitle" className="col-sm-2 col-form-label">ProductTitle</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="productitle" value ={ProductTitle} onChange={e => setProductTitle(e.target.value)} required placeholder="Enter Title ...." />
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label for="productitle" class="col-sm-2 col-form-label">ProductDes</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productitle" value={ProductDes} onChange={e => setProductDes(e.target.value)} required placeholder="Enter Description..." />
+                                    <div className="form-group row">
+                                        <label htmlFor="productitle" className="col-sm-2 col-form-label">ProductDes</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="productitle" value={ProductDes} onChange={e => setProductDes(e.target.value)} required placeholder="Enter Description..." />
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label for="productimg" class="col-sm-2 col-form-label">ProductImg</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productimg"  value={ProductImgUrl} onChange={e => setProductImgUrl(e.target.value)} required placeholder='Enter Product Img URL' />
+                                    <div className="form-group row">
+                                        <label htmlFor="productimg" className="col-sm-2 col-form-label">ProductImg</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="productimg" value={ProductImgUrl} onChange={e => setProductImgUrl(e.target.value)} required placeholder='Enter Product Img URL' />
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label for="productprice" class="col-sm-2 col-form-label">Price</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control" id="productprice" value={Price} onChange={e => setPrice(e.target.value)} required placeholder='Product Price...' />
+                                    <div className="form-group row">
+                                        <label htmlFor="productprice" className="col-sm-2 col-form-label">Price</label>
+                                        <div className="col-sm-10">
+                                            <input type="number" className="form-control" id="productprice" value={Price} onChange={e => setPrice(e.target.value)} required placeholder='Product Price...' />
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="" class="col-sm-2 col-form-label"></label>
-                                        <div class="col-sm-10">
+                                    <div className="form-group row">
+                                        <label htmlFor="" className="col-sm-2 col-form-label"></label>
+                                        <div className="col-sm-10">
                                             <button className="btn btn-primary form-control mt-4" type="submit">ADD</button>
                                         </div>
                                     </div>
@@ -173,28 +168,18 @@ const AdminHome = () => {
 
                 <div id="editproduct" className="tab-pane fade" >
                    <EditProduct />
-                    
-                </div>
 
+                </div>
 
                 <div id="removeproduct" className="tab-pane fade">
                     <RemoveProduct />
                     <br />
                 </div>
 
-
             </div>
 
-
-
-
-
-
-
-
-
         </div>
-    );
-};
+  )
+}
 
-export default AdminHome;
+export default AdminHome

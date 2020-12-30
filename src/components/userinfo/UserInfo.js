@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 const UserInfo = (props) => {
-    return (
+  return (
         <span className="text-white btn btn-outline-success">{props.user}</span>
-    );
-};
+  )
+}
 
-export default UserInfo;
+export default UserInfo

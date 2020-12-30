@@ -1,13 +1,15 @@
-import React from 'react';
+import React from 'react'
 import './msg.css'
 
 const Msgshow = (props) => {
-    return (
-        <div className="msg-notice">
-            <span>{props.message}</span>
-            <button onClick={props.clearMsg}>X</button>
-        </div>
-    );
-};
+  const { message, clearMsg } = props
+  return (
 
-export default Msgshow;
+        <div className="msg-notice">
+            <span>{message}</span>
+            <button onClick={clearMsg}>X</button>
+        </div>
+  )
+}
+
+export default Msgshow

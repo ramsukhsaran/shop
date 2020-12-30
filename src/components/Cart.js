@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react'
 import CartPanel from './cart_panel/CartPanel'
 
 const Cart = () => {
- 
   return (
     <div className="container" style={{ backgroundColor: 'lightblue', marginTop: '20px' }}>
       <br />
@@ -10,7 +9,7 @@ const Cart = () => {
       <br />
     </div>
 
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart
