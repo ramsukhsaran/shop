@@ -46,28 +46,28 @@ const Register = () => {
   }
   return (
         <div className="container-fluid" style={{ backgroundColor: 'lightblue', height: '100vh' }}>
-            <div className="row">
+            <div className="login-flex">
                   <div >{ msg && (<Msgshow message={msg} clearMsg={() => setMsg(undefined)} />)}</div>
                     <div className="col-4 offset-4 card rounded" style={{ backgroundColor: '#f3f3f3', marginTop: '3rem' }}>
                         <div className="text-center mt-1"><i className="fa fa-user-plus fa-2x" aria-hidden="true"></i> </div>
                         <form onSubmit={e => handleSubmit(e)} >
                             <label htmlFor="email">Email ID:</label>
-                            <input className="form-control" id="email" type="text" name="emailId" onChange={e => setEmail(e.target.value)} />
+                            <input className="form-control" id="email" type="text" name="emailId" onChange={e => setEmail(e.target.value)} required />
 
                             <label htmlFor="name">UserName</label>
-                            <input className="form-control" type="text" id="name" name="username" onChange={e => setName(e.target.value)} />
+                            <input className="form-control" type="text" id="name" name="username" onChange={e => setName(e.target.value)} required />
 
                             <label>Password</label>
-                            <input className="form-control" type="password" name="password" onChange={e => setPassword(e.target.value)} />
+                            <input className="form-control" type="password" name="password" onChange={e => setPassword(e.target.value)} required />
 
                             <label>ConfirmPassword</label>
-                            <input className="form-control" type="password" name="cnfpassword" onChange={e => setPasswordCheck(e.target.value)} />
+                            <input className="form-control" type="password" name="cnfpassword" onChange={e => setPasswordCheck(e.target.value)} required />
 
                             <label htmlFor="mobile">Mobile No:</label>
-                            <input className="form-control" type="text" id="mobile" name="mobileno" onChange={e => setMobileno(e.target.value)}/>
+                            <input className="form-control" type="text" id="mobile" name="mobileno" onChange={e => setMobileno(e.target.value)} required />
 
                             <label htmlFor="Address">Address:</label>
-                            <input className="form-control" type="text" id="Address" name="address" onChange={e => setAddress(e.target.value)}/>
+                            <input className="form-control" type="text" id="Address" name="address" onChange={e => setAddress(e.target.value)} required/>
                             <label>Select Role:</label>
                             <select className="form-control" onChange={e => { setRole(e.target.value) }}>
                                 <option value="user">User</option>

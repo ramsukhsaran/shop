@@ -42,7 +42,7 @@ const Login = () => {
 
   return (
         <div className="container-fluid" style={{ backgroundColor: 'lightblue', height: '100vh' }}>
-            <div className="row">
+            <div className="login-flex">
                 <div>{msg && (<Msgshow message={msg} clearMsg={() => setMsg(undefined)} />)}</div>
                     <div className="col-4 offset-4 card rounded" style={{ backgroundColor: '#f3f3f3', marginTop: '8rem' }}>
                     <div className="text-center mb-3 mt-2" >
@@ -50,10 +50,10 @@ const Login = () => {
                     </div>
                         <form>
                             <label className="">Email ID:</label>
-                            <input className="form-control mt-1" type="email" onChange={e => setEmail(e.target.value)} />
+                            <input className="form-control mt-1" type="email" onChange={e => setEmail(e.target.value)} required />
 
                             <label>Password</label>
-                            <input className="form-control" type="password" onChange={e => setPassword(e.target.value)} />
+                            <input className="form-control" type="password" onChange={e => setPassword(e.target.value)} required />
 
                             <br />
                             <div className="mt-3"><button className="btn btn-primary form-control" onClick={e => handleSubmit(e)} >Login</button></div>

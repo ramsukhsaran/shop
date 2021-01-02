@@ -1,7 +1,12 @@
+.login-flex{
+    display:flex;
+    flex-direction:column;
+    
+}
 .msg-notice{
     margin-left:20rem;
-    margin-top: 1rem;
-    width:31rem;
+    margin-top: 2rem;
+    width:25rem;
     padding:1rem;
     border: 1px solid #c96a6a;
     border-radius: 8px;
